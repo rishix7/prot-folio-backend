@@ -11,7 +11,7 @@ const PORT = process.env.X_ZOHO_CATALYST_LISTEN_PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+// Enable CORS for all routes
 
 // WARNING: This is less secure as it allows ANY website to make requests.
 // Only use for initial testing.
