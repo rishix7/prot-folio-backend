@@ -11,11 +11,16 @@ const PORT = process.env.X_ZOHO_CATALYST_LISTEN_PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Middleware
+app.use(cors()); // Enable CORS for all routes
+
+// WARNING: This is less secure as it allows ANY website to make requests.
+// Only use for initial testing.
 app.use(cors({
-    origin: 'https://rishi-50028757716.development.catalystappsail.in', // Your AppSail URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
+
+// ... rest of your server code
 app.use(express.json()); // To parse JSON bodies from incoming requests
 app.use(express.urlencoded({ extended: true })); // To parse URL-encoded bodies
 
