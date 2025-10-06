@@ -10,15 +10,24 @@ const app = express();
 const PORT = process.env.X_ZOHO_CATALYST_LISTEN_PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// Middleware
-// Enable CORS for all routes
 
-// WARNING: This is less secure as it allows ANY website to make requests.
-// Only use for initial testing.
-app.use(cors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-}));
+// Define the exact origin of your frontend hosted on Netlify
+const netlifyOrigin = 'https://rishi-protfolio.netlify.app';
+
+// Configure CORS options
+const corsOptions = {
+  // Allow requests only from your Netlify domain
+  origin: netlifyOrigin, 
+  // Allow necessary HTTP methods (POST is definitely needed for contact forms)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+  // Allow credentials if your app uses cookies or session tokens
+  credentials: true 
+};
+
+// Apply the CORS middleware
+app.use(cors(corsOptions));
+
+// ... rest of your server code (routes, database connection, etc.)
 
 // ... rest of your server code
 app.use(express.json()); // To parse JSON bodies from incoming requests
